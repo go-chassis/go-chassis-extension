@@ -1,0 +1,26 @@
+package: github.com/go-chassis/go-chassis-plugins
+ignore:
+- github.com/ServiceComb/go-chassis
+import:
+- package: k8s.io/client-go
+  version: 7c4d4e9c37e45f111d4ca76c6e38f7d65bd4a44e
+  repo: https://github.com/kubernetes/client-go
+  subpackages:
+  - kubernetes/fake
+  - kubernetes
+  - tools
+- package: golang.org/x/crypto
+  version: 49796115aa4b964c318aad4f3084fdb41e9aa067
+  repo: https://github.com/golang/crypto
+- package: golang.org/x/time
+  version: f51c12702a4d776e4c1fa9b0fabab841babae631
+  repo: https://github.com/golang/time
+- package: golang.org/x/net
+  version: 1c05540f6879653db88113bc4a2b70aec4bd491f
+  repo: https://github.com/golang/net
+- package: golang.org/x/sys
+  version: 95c6576299259db960f6c5b9b69ea52422860fce
+  repo: https://github.com/golang/sys
+- package: golang.org/x/text
+  version: b19bf474d317b857955b12035d2c5acb57ce8b01
+  repo: https://github.com/golang/text
