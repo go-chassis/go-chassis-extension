@@ -8,4 +8,4 @@ Checkout the very first go chassis plugin for [kubernetes discovery](http://go-c
 # Plugins
 | Name     |description    |go chassiss plugin type|
 |----------|:-------------:|------:|
-| kubernetes | use kubernetes as servcice discovery service | ServiceDiscovery |
+|kubernetes |use kubernetes as servcice discovery service |ServiceDiscovery |
