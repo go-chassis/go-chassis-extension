@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ServiceComb/go-chassis/core/common"
+	"github.com/go-chassis/go-chassis/core/common"
 )
 
 func splitServiceKey(key string) (name, namespace string) {
