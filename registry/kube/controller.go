@@ -110,7 +110,7 @@ func (dc *DiscoveryController) FindEndpoints(service string, tags utiltags.Tags)
 func (dc *DiscoveryController) GetAllServices() ([]*registry.MicroService, error) {
 	microServices, err := dc.sLister.List(labels.Everything())
 	if err != nil {
-		lager.Logger.Errorf(err, "get all microservices from kube failed")
+		lager.Logger.Errorf("get all microservices from kube failed: %s", err.Error())
 		return nil, err
 	}
 	ms := make([]*registry.MicroService, len(microServices))

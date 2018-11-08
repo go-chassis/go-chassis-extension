@@ -6,7 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ServiceComb/go-chassis/core/lager"
+	"github.com/go-chassis/go-chassis/core/lager"
+	"github.com/go-chassis/go-chassis/pkg/util/tags"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -22,8 +23,8 @@ func TestDiscoveryController(t *testing.T) {
 	sharedfactory := informers.NewSharedInformerFactory(client, 0)
 	sInformer := sharedfactory.Core().V1().Services()
 	eInformer := sharedfactory.Core().V1().Endpoints()
-
-	dc := NewDiscoveryController(sInformer, eInformer, client)
+	pInformer := sharedfactory.Core().V1().Pods()
+	dc := NewDiscoveryController(sInformer, eInformer, pInformer, client)
 	sharedfactory.Start(ctx.Done())
 	dc.Run(ctx.Done())
 
@@ -47,8 +48,8 @@ func TestDiscoveryController(t *testing.T) {
 	}
 
 	time.Sleep(1 * time.Second)
-	ret, err := dc.FindEndpoints("kubeserver.default.svc.local", nil)
-	assert.Equal(t, len(ret), 1)
+	ret, err := dc.FindEndpoints("kubeserver.default.svc.local", utiltags.Tags{})
+	assert.Equal(t, 1, len(ret))
 	for _, ep := range ret {
 		log.Printf("Got endpoints %s(%s)", ep.EndpointsMap, ep.ServiceID)
 		assert.Equal(t, ep.EndpointsMap["rest"], "127.0.0.1:9090")
