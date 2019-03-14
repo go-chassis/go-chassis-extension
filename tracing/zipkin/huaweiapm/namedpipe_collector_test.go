@@ -1,6 +1,6 @@
 // +build linux
 
-package zipkin
+package huaweiapm_test
 
 import (
 	"bufio"
@@ -9,6 +9,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/go-chassis/go-chassis-plugins/tracing/zipkin/huaweiapm"
 	"github.com/go-chassis/go-chassis/core/lager"
 	"github.com/openzipkin-contrib/zipkin-go-opentracing/thrift/gen-go/zipkincore"
 	"github.com/stretchr/testify/assert"
@@ -55,9 +56,9 @@ func TestNewCollector_linux(t *testing.T) {
 	}
 
 	go readNamedPipe(target)
-	collector, err := newNamedPipeCollectorLinux(target)
+	collector, err := huaweiapm.NewNamedPipeCollectorLinux(target)
 	assert.NoError(t, err)
-	namedPipeCollector, ok := collector.(*FileCollector)
+	namedPipeCollector, ok := collector.(*huaweiapm.FileCollector)
 	assert.True(t, ok)
 	assert.NotNil(t, namedPipeCollector)
 
@@ -71,9 +72,9 @@ func TestNewCollector_linux(t *testing.T) {
 	assert.NoError(t, err)
 	oldModifyTime := fileInfo.ModTime()
 
-	collector, err = newNamedPipeCollectorLinux(target)
+	collector, err = huaweiapm.NewNamedPipeCollectorLinux(target)
 	assert.NoError(t, err)
-	namedPipeCollector, ok = collector.(*FileCollector)
+	namedPipeCollector, ok = collector.(*huaweiapm.FileCollector)
 	assert.True(t, ok)
 	assert.NotNil(t, namedPipeCollector)
 
