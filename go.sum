@@ -15,6 +15,8 @@ github.com/apache/thrift v0.0.0-20180829120307-8de3749235db h1:wK8K96PXMirNKpbyE
 github.com/apache/thrift v0.0.0-20180829120307-8de3749235db/go.mod h1:cp2SuWMxlEZw2r+iP2GNCdIi4C1qmUzdZFSVb+bacwQ=
 github.com/apache/thrift v0.0.0-20190313173900-f26f4e1e6d7a h1:z06GWS6AMuSXEDBPWF4cVrmy9bVkg+//U6POGRl8CgI=
 github.com/apache/thrift v0.0.0-20190313173900-f26f4e1e6d7a/go.mod h1:cp2SuWMxlEZw2r+iP2GNCdIi4C1qmUzdZFSVb+bacwQ=
+github.com/apache/thrift v0.12.0 h1:ymFY8b00T66exzV1OxAnIA8mawFjPyH6l0wjuv8zTxY=
+github.com/apache/thrift v0.12.0/go.mod h1:cp2SuWMxlEZw2r+iP2GNCdIi4C1qmUzdZFSVb+bacwQ=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
 github.com/cactus/go-statsd-client v3.1.1+incompatible/go.mod h1:cMRcwZDklk7hXp+Law83urTHUiHMzCev/r4JMYr/zU0=
 github.com/cenkalti/backoff v2.0.0+incompatible h1:5IIPUHhlnUZbcHQsQou5k1Tn58nJkeJL9U+ig5CHJbY=
@@ -69,6 +71,12 @@ github.com/go-chassis/go-chassis-plugins v0.0.0-20180731065901-7b05d8d2fbe6/go.m
 github.com/go-chassis/go-restful-swagger20 v0.0.0-20181221101811-a33c76fe4a6e/go.mod h1:s+06mcAnGsVYQ2sqM4ZPiMJeRj7BTeAM/4gkhZNcsjA=
 github.com/go-chassis/go-sc-client v0.0.0-20180831081217-8135c6df7f96/go.mod h1:IS3XXS6JdNbKP4K7duT+q2Gk8+yJq5EUh+5zTMWnCDg=
 github.com/go-chassis/go-sc-client v0.0.0-20180925063328-78ad13b4fbef/go.mod h1:IS3XXS6JdNbKP4K7duT+q2Gk8+yJq5EUh+5zTMWnCDg=
+github.com/go-chassis/huawei-apm v0.0.0-20190313015419-01a357ddeafb h1:qTJcJmF/dbVKsoY3MzRZ59TjhN2H11w6r0gmoO8ZgZc=
+github.com/go-chassis/huawei-apm v0.0.0-20190313015419-01a357ddeafb/go.mod h1:9Nu6BkByTpLKsbUg1iuI2d6S/F72pCyr/PoMOxDQ9kY=
+github.com/go-chassis/huawei-apm v0.0.0-20190314103045-f814a411570c h1:i42TANyhQsFhbFTDMMJZrBOdMtiBJ/kmvsSF4hpIpa4=
+github.com/go-chassis/huawei-apm v0.0.0-20190314103045-f814a411570c/go.mod h1:9xToopK/eref8/8PlMt9URAQd5RXQF6lebVSz741AyU=
+github.com/go-chassis/huawei-apm v0.0.0-20190315045100-5b80092faa2d h1:I0IYUVHUupjUgHbyG35UZ6JZrAv6M9tUQdsYtrix/Xk=
+github.com/go-chassis/huawei-apm v0.0.0-20190315045100-5b80092faa2d/go.mod h1:9xToopK/eref8/8PlMt9URAQd5RXQF6lebVSz741AyU=
 github.com/go-chassis/paas-lager v0.0.0-20180831030822-312e8737a225/go.mod h1:tILYbn3+0jjCxhY6/ue9L8eRq+VJ60U6VYIdugqchB4=
 github.com/go-chassis/paas-lager v0.0.0-20180905100939-eff93e5e67db h1:K2jREf+jzNKbjGtpmu9/WrBzGPLLSVHrFhGvY74yXwM=
 github.com/go-chassis/paas-lager v0.0.0-20180905100939-eff93e5e67db/go.mod h1:tILYbn3+0jjCxhY6/ue9L8eRq+VJ60U6VYIdugqchB4=
@@ -156,6 +164,8 @@ github.com/opentracing/opentracing-go v1.0.2 h1:3jA2P6O1F9UOrWVpwrIo17pu01KWvNWg
 github.com/opentracing/opentracing-go v1.0.2/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/openzipkin-contrib/zipkin-go-opentracing v0.0.0-20180726151020-b85dc675b16b h1:sM8Q+fCKUVflyDurBCk+3Cwl8KG12QAeO0eE3HzPRCg=
 github.com/openzipkin-contrib/zipkin-go-opentracing v0.0.0-20180726151020-b85dc675b16b/go.mod h1:uVHyebswE1cCXr2A73cRM2frx5ld1RJUCJkFNZ90ZiI=
+github.com/openzipkin-contrib/zipkin-go-opentracing v0.3.5 h1:82Tnq9OJpn+h5xgGpss5/mOv3KXdjtkdorFSOUusjM8=
+github.com/openzipkin-contrib/zipkin-go-opentracing v0.3.5/go.mod h1:uVHyebswE1cCXr2A73cRM2frx5ld1RJUCJkFNZ90ZiI=
 github.com/patrickmn/go-cache v2.1.0+incompatible h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc=
 github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
 github.com/petar/GoLLRB v0.0.0-20130427215148-53be0d36a84c/go.mod h1:HUpKUBZnpzkdx0kD/+Yfuft+uD3zHGtXF/XJB14TUr4=
@@ -232,6 +242,8 @@ gopkg.in/alecthomas/kingpin.v2 v2.2.6/go.mod h1:FMv+mEhP44yOT+4EoQTLFTRgOQ1FBLks
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/inf.v0 v0.9.1 h1:73M5CoZyi3ZLMOyDlQh031Cx6N9NDJ2Vvfl76EDAgDc=
 gopkg.in/inf.v0 v0.9.1/go.mod h1:cWUDdTG/fYaXco+Dcufb5Vnc6Gp2YChqWtbxRZE0mXw=
+gopkg.in/validator.v2 v2.0.0-20180514200540-135c24b11c19 h1:WB265cn5OpO+hK3pikC9hpP1zI/KTwmyMFKloW9eOVc=
+gopkg.in/validator.v2 v2.0.0-20180514200540-135c24b11c19/go.mod h1:o4V0GXN9/CAmCsvJ0oXYZvrZOe7syiDZSN1GWGZTGzc=
 gopkg.in/yaml.v2 v2.2.1 h1:mUhvW9EsL+naU5Q3cakzfE91YhliOondGd6ZrsDBHQE=
 gopkg.in/yaml.v2 v2.2.1/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 honnef.co/go/tools v0.0.0-20180728063816-88497007e858/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
