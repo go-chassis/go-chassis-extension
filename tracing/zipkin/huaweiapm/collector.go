@@ -1,4 +1,4 @@
-package zipkin
+package huaweiapm
 
 import (
 	"bytes"
@@ -54,6 +54,6 @@ func Serialize(spans []*zipkincore.Span) *bytes.Buffer {
 // collectorNewer new collector
 type collectorNewer func(string) (zipkin.Collector, error)
 
-var newNamedPipeCollector collectorNewer = func(string) (zipkin.Collector, error) {
+var NewNamedPipeCollector collectorNewer = func(string) (zipkin.Collector, error) {
 	return nil, errors.New("OS does not support named pipe")
 }

@@ -1,6 +1,6 @@
 // +build linux
 
-package zipkin
+package huaweiapm
 
 import (
 	"os"
@@ -11,7 +11,7 @@ import (
 )
 
 // record span to named pipe
-func newNamedPipeCollectorLinux(path string) (zipkin.Collector, error) {
+func NewNamedPipeCollectorLinux(path string) (zipkin.Collector, error) {
 	fileInfo, err := os.Stat(path)
 	needCreate := true
 
@@ -57,5 +57,5 @@ func newNamedPipeCollectorLinux(path string) (zipkin.Collector, error) {
 }
 
 func init() {
-	newNamedPipeCollector = newNamedPipeCollectorLinux
+	NewNamedPipeCollector = NewNamedPipeCollectorLinux
 }

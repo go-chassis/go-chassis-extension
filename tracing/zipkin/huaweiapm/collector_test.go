@@ -1,10 +1,10 @@
-package zipkin_test
+package huaweiapm_test
 
 import (
 	"testing"
 
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/go-chassis/go-chassis/tracing/zipkin"
+	"github.com/go-chassis/go-chassis-plugins/tracing/zipkin/huaweiapm"
 	"github.com/openzipkin-contrib/zipkin-go-opentracing/thrift/gen-go/zipkincore"
 	"github.com/stretchr/testify/assert"
 )
@@ -24,7 +24,7 @@ func TestSerialize(t *testing.T) {
 		Annotations:       make([]*zipkincore.Annotation, 0),
 		BinaryAnnotations: make([]*zipkincore.BinaryAnnotation, 0),
 	}
-	byteBuffer := zipkin.Serialize([]*zipkincore.Span{span})
+	byteBuffer := huaweiapm.Serialize([]*zipkincore.Span{span})
 	buffer := thrift.NewTMemoryBuffer()
 	if _, err := buffer.Write(byteBuffer.Bytes()); err != nil {
 		t.Error(err)
