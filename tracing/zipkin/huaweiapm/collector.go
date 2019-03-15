@@ -1,59 +1,30 @@
 package huaweiapm
 
 import (
-	"bytes"
-	"errors"
-	"os"
-
-	"github.com/apache/thrift/lib/go/thrift"
-	zipkin "github.com/openzipkin-contrib/zipkin-go-opentracing"
+	"github.com/go-chassis/huawei-apm"
+	"github.com/openzipkin-contrib/zipkin-go-opentracing"
 	"github.com/openzipkin-contrib/zipkin-go-opentracing/thrift/gen-go/zipkincore"
 )
 
-// constant for tracing zipkin and pipe collectors
-const (
-	TracingZipkinCollector    = "zipkin"
-	TracingNamedPipeCollector = "namedPipe"
-)
-
-//FileCollector collects span to file
-type FileCollector struct {
-	Fd *os.File
+//Collector collects span to huawei apm
+type collector struct {
+	reporter *huaweiapm.TracingReporter
 }
 
-// Collect serialize the zipkin spans and write into the file collector
-func (f *FileCollector) Collect(s *zipkincore.Span) error {
-	buf := Serialize([]*zipkincore.Span{s})
-	_, err := f.Fd.Write(buf.Bytes())
-	return err
-}
-
-// Close close file collector
-func (f *FileCollector) Close() error {
-	return f.Fd.Close()
-}
-
-// Serialize serialize the zipkin spans
-func Serialize(spans []*zipkincore.Span) *bytes.Buffer {
-	t := thrift.NewTMemoryBuffer()
-	p := thrift.NewTBinaryProtocolTransport(t)
-	if err := p.WriteListBegin(thrift.STRUCT, len(spans)); err != nil {
-		panic(err)
+func NewCollector(interval string, size int) zipkintracer.Collector {
+	c := &collector{
+		reporter: huaweiapm.NewTracingReporter(interval, size),
 	}
-	for _, s := range spans {
-		if err := s.Write(p); err != nil {
-			panic(err)
-		}
-	}
-	if err := p.WriteListEnd(); err != nil {
-		panic(err)
-	}
-	return t.Buffer
+	return c
 }
 
-// collectorNewer new collector
-type collectorNewer func(string) (zipkin.Collector, error)
+// Collect serialize the zipkin spans and write into the fifo
+func (c *collector) Collect(s *zipkincore.Span) error {
+	c.reporter.WriteSpan(s)
+	return nil
+}
 
-var NewNamedPipeCollector collectorNewer = func(string) (zipkin.Collector, error) {
-	return nil, errors.New("OS does not support named pipe")
+// Close will never be called
+func (c *collector) Close() error {
+	return nil
 }
