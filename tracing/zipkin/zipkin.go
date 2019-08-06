@@ -72,7 +72,6 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 		defaultRecorder,
 		zipkintracer.ClientServerSameSpan(true),
 		zipkintracer.TraceID128Bit(true),
-		zipkintracer.WithPrefixTracerState(options["prefixTracerState"]),
 	)
 	if err != nil {
 		openlogging.Error(err.Error())
