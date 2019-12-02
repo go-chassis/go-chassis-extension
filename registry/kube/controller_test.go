@@ -16,7 +16,7 @@ import (
 )
 
 func TestDiscoveryController(t *testing.T) {
-	lager.Initialize("", "INFO", "", "size", true, 1, 10, 7)
+	lager.Init(&lager.Options{})
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 
 	client := fake.NewSimpleClientset()
