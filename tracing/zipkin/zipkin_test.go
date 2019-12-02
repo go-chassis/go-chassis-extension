@@ -2,14 +2,11 @@ package zipkin_test
 
 import (
 	"github.com/go-chassis/go-chassis-plugins/tracing/zipkin"
-	"github.com/go-chassis/go-chassis/core/lager"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestNewTracer(t *testing.T) {
-	lager.Initialize("", "DEBUG", "", "size", true, 1, 10, 7)
-
 	tracer, err := zipkin.NewTracer(map[string]string{
 		"URI":           "",
 		"batchInterval": "1s",
