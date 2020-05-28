@@ -9,3 +9,4 @@ Here is a place for go chassis extension
 |----------|:-------------:|
 |registry/kubernetes |use kubernetes for service discovery |
 |tracing/zipkin |an opentracing implementation |
+|protocol/grpc | grpc communication between services |
