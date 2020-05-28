@@ -2,12 +2,11 @@ package main
 
 import (
 	"github.com/go-chassis/go-chassis"
-	_ "github.com/go-chassis/go-chassis-plugins/registry/kube"
 	"github.com/go-chassis/go-chassis/core/lager"
 	"github.com/go-chassis/go-chassis/core/server"
 	"github.com/go-chassis/go-chassis/examples/schemas"
 
-	_ "github.com/go-chassis/go-chassis-plugins/registry/kube"
+	_ "github.com/go-chassis/go-chassis-extension/registry/kubernetes"
 	_ "github.com/go-chassis/go-chassis/bootstrap"
 )
 
