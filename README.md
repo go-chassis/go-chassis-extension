@@ -2,11 +2,10 @@
 
 Here is a place for go chassis extension
 
-Checkout the very first go chassis plugin for [kubernetes discovery](https://docs.go-chassis.com/discovery/kube-discovery.html)
 
 
-# Plugins
+# Extensions
 | Name     |description    |
 |----------|:-------------:|
-|registry/kube |use kubernetes as servcice discovery service |
+|registry/kubernetes |use kubernetes for service discovery |
 |tracing/zipkin |an opentracing implementation |

@@ -15,9 +15,6 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
 
-    - name: Build
-      run: go build -v .
-
     - name: Fmt
       run: |
         bash scripts/ci/formatChecker.sh
@@ -33,8 +30,3 @@ jobs:
       run: |
         go get github.com/fzipp/gocyclo
         bash scripts/ci/goCycloChecker.sh
-    - name: UT
-      run: |
-        go get github.com/stretchr/testify
-        go get golang.org/x/tools/cmd/cover
-        bash scripts/ci/unit_test.sh
