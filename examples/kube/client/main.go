@@ -9,7 +9,7 @@ import (
 	"github.com/go-chassis/go-chassis/core"
 	"github.com/go-chassis/go-chassis/core/lager"
 
-	_ "github.com/go-chassis/go-chassis-plugins/registry/kube"
+	_ "github.com/go-chassis/go-chassis-extension/registry/kubernetes"
 	_ "github.com/go-chassis/go-chassis/bootstrap"
 	"github.com/go-chassis/go-chassis/pkg/util/httputil"
 )

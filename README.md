@@ -1,6 +1,6 @@
-# go-chassis-plugins
+# go-chassis-extension
 
-Here is a place for go chassis plugins
+Here is a place for go chassis extension
 
 Checkout the very first go chassis plugin for [kubernetes discovery](https://docs.go-chassis.com/discovery/kube-discovery.html)
 
