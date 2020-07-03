@@ -1,6 +1,10 @@
 # go-chassis-extension
 
-Here is a place for go chassis extension
+include plugins of go chassis. to enhance your application functionality or replace the default module of go chassis
+
+Plugins includes:
+- protocol: protocol plugin for service communication
+- registry: service discovery plugin
 
 
 
