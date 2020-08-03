@@ -3,7 +3,6 @@ module github.com/go-chassis/go-chassis-extension/tracing/zipkin
 require (
 	github.com/go-chassis/go-chassis v1.8.3
 	github.com/go-chassis/go-chassis-plugins v0.0.0-20200511232319-d84d8c0fadb4
-	github.com/go-chassis/huawei-apm v0.0.0-20190315045100-5b80092faa2d
 	github.com/go-mesh/openlogging v1.0.1
 	github.com/opentracing/opentracing-go v1.0.2
 	github.com/openzipkin-contrib/zipkin-go-opentracing v0.3.5
