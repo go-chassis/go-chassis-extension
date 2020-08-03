@@ -1,7 +1,7 @@
 package zipkin_test
 
 import (
-	"github.com/go-chassis/go-chassis-plugins/tracing/zipkin"
+	"github.com/go-chassis/go-chassis-extension/tracing/zipkin"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

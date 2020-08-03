@@ -1,6 +1,7 @@
 module github.com/go-chassis/go-chassis-extension/tracing/zipkin
 
 require (
+	github.com/apache/thrift v0.12.0
 	github.com/go-chassis/go-chassis v1.8.2-0.20200803103444-d7b1d63e60bc
 	github.com/go-mesh/openlogging v1.0.1
 	github.com/opentracing/opentracing-go v1.1.0
