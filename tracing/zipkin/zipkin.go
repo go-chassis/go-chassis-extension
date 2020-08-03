@@ -5,7 +5,6 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-chassis/go-chassis-plugins/tracing/zipkin/huaweiapm"
 	"github.com/go-chassis/go-chassis/core/tracing"
 	"github.com/go-chassis/go-chassis/pkg/runtime"
 	"github.com/go-mesh/openlogging"
@@ -58,8 +57,6 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 			openlogging.Error(err.Error())
 			return nil, fmt.Errorf("unable to create zipkin collector: %+v", err)
 		}
-	} else if collectorOption == "huaweiapm" {
-		collector = huaweiapm.NewCollector(bi, batchSize)
 	} else {
 		return nil, fmt.Errorf("unable to create zipkin collector: %s", collectorOption)
 	}
