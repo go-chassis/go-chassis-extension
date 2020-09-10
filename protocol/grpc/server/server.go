@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"reflect"
 
 	"github.com/go-chassis/go-chassis/v2/core/common"
 	"github.com/go-chassis/go-chassis/v2/core/handler"
@@ -88,12 +89,16 @@ func (s *Server) Register(schema interface{}, options ...server.RegisterOption) 
 	if opts.RPCSvcDesc == nil {
 		return "", ErrGRPCSvcDescMissing
 	}
-	desc, ok := opts.RPCSvcDesc.(*grpc.ServiceDesc)
-	if !ok {
-		return "", ErrGRPCSvcType
-	}
-	s.s.RegisterService(desc, schema)
+	invoke(opts.RPCSvcDesc, s.s, schema)
 	return "", nil
+}
+
+func invoke(any interface{}, args ...interface{}) {
+	inputs := make([]reflect.Value, len(args))
+	for i := range args {
+		inputs[i] = reflect.ValueOf(args[i])
+	}
+	reflect.ValueOf(any).Call(inputs)
 }
 
 //Start launch the server
