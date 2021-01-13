@@ -3,7 +3,7 @@ package kuberegistry
 import (
 	"strconv"
 
-	"github.com/go-chassis/go-chassis/core/registry"
+	"github.com/go-chassis/go-chassis/v2/core/registry"
 	v1 "k8s.io/api/core/v1"
 )
 

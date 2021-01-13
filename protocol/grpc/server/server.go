@@ -5,14 +5,14 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/go-chassis/go-chassis/core/common"
-	"github.com/go-chassis/go-chassis/core/handler"
-	"github.com/go-chassis/go-chassis/core/invocation"
-	"github.com/go-chassis/go-chassis/core/registry"
-	"github.com/go-chassis/go-chassis/core/server"
-	"github.com/go-chassis/go-chassis/pkg/runtime"
-	"github.com/go-chassis/go-chassis/pkg/util/iputil"
-	"github.com/go-mesh/openlogging"
+	"github.com/go-chassis/go-chassis/v2/core/common"
+	"github.com/go-chassis/go-chassis/v2/core/handler"
+	"github.com/go-chassis/go-chassis/v2/core/invocation"
+	"github.com/go-chassis/go-chassis/v2/core/registry"
+	"github.com/go-chassis/go-chassis/v2/core/server"
+	"github.com/go-chassis/go-chassis/v2/pkg/runtime"
+	"github.com/go-chassis/go-chassis/v2/pkg/util/iputil"
+	"github.com/go-chassis/openlog"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -62,18 +62,14 @@ func New(opts server.Options) server.ProtocolServer {
 	interceptor := func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handle grpc.UnaryHandler) (resp interface{}, err error) {
 		c, err := handler.GetChain(common.Provider, opts.ChainName)
 		if err != nil {
-			openlogging.Error(fmt.Sprintf("Handler chain init err [%s]", err.Error()))
+			openlog.Error(fmt.Sprintf("Handler chain init err [%s]", err.Error()))
 			return nil, err
 		}
 		inv := Request2Invocation(ctx, req, info)
 		var r *invocation.Response
-		c.Next(inv, func(ir *invocation.Response) error {
-			if ir.Err != nil {
-				return ir.Err
-			}
+		c.Next(inv, func(ir *invocation.Response) {
 			ir.Result, ir.Err = handle(ctx, req)
 			r = ir
-			return ir.Err
 		})
 		return r.Result, r.Err
 	}
@@ -104,7 +100,7 @@ func (s *Server) Register(schema interface{}, options ...server.RegisterOption) 
 func (s *Server) Start() error {
 	listener, host, port, lisErr := iputil.StartListener(s.opts.Address, s.opts.TLSConfig)
 	if lisErr != nil {
-		openlogging.Error("listening failed, reason:" + lisErr.Error())
+		openlog.Error("listening failed, reason:" + lisErr.Error())
 		return lisErr
 	}
 

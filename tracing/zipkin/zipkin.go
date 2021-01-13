@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-chassis/go-chassis/core/tracing"
-	"github.com/go-chassis/go-chassis/pkg/runtime"
-	"github.com/go-mesh/openlogging"
+	"github.com/go-chassis/go-chassis/v2/core/tracing"
+	"github.com/go-chassis/go-chassis/v2/pkg/runtime"
+	"github.com/go-chassis/openlog"
 	"github.com/opentracing/opentracing-go"
 	"github.com/openzipkin-contrib/zipkin-go-opentracing"
 )
@@ -54,7 +54,7 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 		var err error
 		collector, err = zipkintracer.NewHTTPCollector(uri, zipkintracer.HTTPBatchSize(batchSize), zipkintracer.HTTPBatchInterval(batchInterval))
 		if err != nil {
-			openlogging.Error(err.Error())
+			openlog.Error(err.Error())
 			return nil, fmt.Errorf("unable to create zipkin collector: %+v", err)
 		}
 	} else {
@@ -72,7 +72,7 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 		zipkintracer.WithPrefixTracerState(options["prefixTracerState"]),
 	)
 	if err != nil {
-		openlogging.Error(err.Error())
+		openlog.Error(err.Error())
 		return nil, fmt.Errorf("unable to create zipkin tracer: %+v", err)
 	}
 	return tracer, nil
