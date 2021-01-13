@@ -6,8 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-chassis/go-chassis/core/lager"
-	"github.com/go-chassis/go-chassis/pkg/util/tags"
+	"github.com/go-chassis/go-chassis/v2/pkg/util/tags"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

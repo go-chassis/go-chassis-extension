@@ -4,8 +4,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/go-chassis/go-chassis/core/registry"
-	utiltags "github.com/go-chassis/go-chassis/pkg/util/tags"
+	"github.com/go-chassis/go-chassis/v2/core/registry"
+	utiltags "github.com/go-chassis/go-chassis/v2/pkg/util/tags"
 	"k8s.io/client-go/informers"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"

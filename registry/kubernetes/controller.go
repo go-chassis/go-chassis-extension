@@ -1,9 +1,9 @@
 package kuberegistry
 
 import (
-	"github.com/go-chassis/go-chassis/core/lager"
-	"github.com/go-chassis/go-chassis/core/registry"
-	utiltags "github.com/go-chassis/go-chassis/pkg/util/tags"
+	"fmt"
+	"github.com/go-chassis/go-chassis/v2/core/registry"
+	utiltags "github.com/go-chassis/go-chassis/v2/pkg/util/tags"
 	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	coreinformers "k8s.io/client-go/informers/core/v1"
@@ -57,20 +57,20 @@ func NewDiscoveryController(
 func (dc *DiscoveryController) Run(stop <-chan struct{}) {
 	lager.Logger.Info("Starting Discovery Controller")
 	if !cache.WaitForCacheSync(stop, dc.sListerSynced, dc.eListerSynced, dc.pListerSynced) {
-		lager.Logger.Error("Time out waiting for caches to sync", nil)
+		openlog.Error("Time out waiting for caches to sync", nil)
 		return
 	}
-	lager.Logger.Info("Finish Waiting For Cache Sync")
+	openlog.Info("Finish Waiting For Cache Sync")
 }
 
 func (dc *DiscoveryController) addService(obj interface{}) {
 	svc := obj.(*v1.Service)
-	lager.Logger.Infof("Add Service: %s", svc.Name)
+	openlog.Info(fmt.Sprintf("Add Service: %s", svc.Name))
 }
 
 func (dc *DiscoveryController) addEndpoints(obj interface{}) {
 	ep := obj.(*v1.Endpoints)
-	lager.Logger.Infof("Add Endpoint: %s", ep.Name)
+	openlog.Info(fmt.Sprintf("Add Endpoint: %s", ep.Name))
 }
 
 // FindEndpoints returns microservice instances of kube registry
@@ -88,7 +88,7 @@ func (dc *DiscoveryController) FindEndpoints(service string, tags utiltags.Tags)
 		for _, as := range ss.Addresses {
 			pod, err := dc.pLister.Pods(as.TargetRef.Namespace).Get(as.TargetRef.Name)
 			if err != nil {
-				lager.Logger.Warnf("error list pods: %s", as.TargetRef.Name)
+				openlog.Warn(fmt.Sprintf("error list pods: %s", as.TargetRef.Name))
 				continue
 			}
 			if !tags.IsSubsetOf(pod.Labels) {
@@ -110,13 +110,13 @@ func (dc *DiscoveryController) FindEndpoints(service string, tags utiltags.Tags)
 func (dc *DiscoveryController) GetAllServices() ([]*registry.MicroService, error) {
 	microServices, err := dc.sLister.List(labels.Everything())
 	if err != nil {
-		lager.Logger.Errorf("get all microservices from kube failed: %s", err.Error())
+		openlog.Info(fmt.Sprintf("get all microservices from kube failed: %s", err.Error()))
 		return nil, err
 	}
 	ms := make([]*registry.MicroService, len(microServices))
 	for i, s := range microServices {
 		ms[i] = toMicroService(s)
 	}
-	lager.Logger.Debugf("get all microservices success, microservices: %v", microServices)
+	openlog.Debug(fmt.Sprintf("get all microservices success, microservices: %v", microServices))
 	return ms, nil
 }

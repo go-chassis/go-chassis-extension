@@ -1,8 +1,8 @@
 package client_test
 
 import (
-	"github.com/go-chassis/go-chassis-protocol/client/grpc"
-	"github.com/go-chassis/go-chassis/core/common"
+	"github.com/go-chassis/go-chassis-extension/protocol/grpc/client"
+	"github.com/go-chassis/go-chassis/v2/core/common"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
 	"testing"
@@ -13,7 +13,7 @@ func TestTransformContext(t *testing.T) {
 		"1": "2",
 		"3": "4",
 	})
-	ctx = grpc.TransformContext(ctx)
+	ctx = client.TransformContext(ctx)
 	md, ok := metadata.FromOutgoingContext(ctx)
 	assert.True(t, ok)
 	assert.Equal(t, "2", md["1"][0])
