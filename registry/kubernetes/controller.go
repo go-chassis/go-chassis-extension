@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-chassis/go-chassis/v2/core/registry"
 	utiltags "github.com/go-chassis/go-chassis/v2/pkg/util/tags"
+	"github.com/go-chassis/openlog"
 	"k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	coreinformers "k8s.io/client-go/informers/core/v1"
@@ -55,7 +56,7 @@ func NewDiscoveryController(
 
 // Run begins discovery controller
 func (dc *DiscoveryController) Run(stop <-chan struct{}) {
-	lager.Logger.Info("Starting Discovery Controller")
+	openlog.Info("Starting Discovery Controller")
 	if !cache.WaitForCacheSync(stop, dc.sListerSynced, dc.eListerSynced, dc.pListerSynced) {
 		openlog.Error("Time out waiting for caches to sync", nil)
 		return
@@ -83,7 +84,7 @@ func (dc *DiscoveryController) FindEndpoints(service string, tags utiltags.Tags)
 		return nil, err
 	}
 
-	ins := []*registry.MicroServiceInstance{}
+	ins := make([]*registry.MicroServiceInstance, 0)
 	for _, ss := range ep.Subsets {
 		for _, as := range ss.Addresses {
 			pod, err := dc.pLister.Pods(as.TargetRef.Namespace).Get(as.TargetRef.Name)
