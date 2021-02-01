@@ -49,7 +49,7 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 	if collectorOption == "" {
 		collectorOption = DefaultCollector
 	}
-	openlogging.GetLogger().Infof("New Zipkin tracer with options %s,%d,%s", uri, batchSize, batchInterval)
+	openlog.Info(fmt.Sprintf("zipkin tracer with options %s,%d,%s", uri, batchSize, batchInterval))
 	if collectorOption == DefaultCollector {
 		var err error
 		collector, err = zipkintracer.NewHTTPCollector(uri, zipkintracer.HTTPBatchSize(batchSize), zipkintracer.HTTPBatchInterval(batchInterval))

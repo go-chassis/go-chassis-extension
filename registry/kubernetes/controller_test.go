@@ -15,7 +15,6 @@ import (
 )
 
 func TestDiscoveryController(t *testing.T) {
-	lager.Init(&lager.Options{})
 	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 
 	client := fake.NewSimpleClientset()
@@ -34,14 +33,14 @@ func TestDiscoveryController(t *testing.T) {
 				TargetRef: &v1.ObjectReference{UID: "12345"}}},
 			Ports: []v1.EndpointPort{{Name: "rest", Port: 9090}},
 		}}}
-	_, err := client.Core().Endpoints("default").Create(p)
+	_, err := client.CoreV1().Endpoints("default").Create(ctx, p, metav1.CreateOptions{})
 	if err != nil {
 		t.Errorf("error create endpoints: %v", err)
 	}
 
 	// create services
 	s := &v1.Service{ObjectMeta: metav1.ObjectMeta{Name: "kubeserver"}}
-	_, err = client.Core().Services("default").Create(s)
+	_, err = client.CoreV1().Services("default").Create(ctx, p, metav1.CreateOptions{})
 	if err != nil {
 		t.Errorf("error create service: %v", err)
 	}

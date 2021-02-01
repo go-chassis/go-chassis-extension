@@ -8,7 +8,7 @@ import (
 
 func TestNewTracer(t *testing.T) {
 	tracer, err := zipkin.NewTracer(map[string]string{
-		"URI":           "",
+		"URI":           "https://10.1.1.1",
 		"batchInterval": "1s",
 	})
 	assert.NotNil(t, tracer)
