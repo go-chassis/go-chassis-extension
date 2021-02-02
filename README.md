@@ -14,3 +14,4 @@ Plugins includes:
 |registry/kubernetes |use kubernetes for service discovery |
 |tracing/zipkin |an opentracing implementation |
 |protocol/grpc | grpc communication between services |
+|protocol/gin | support native gin programing model|
