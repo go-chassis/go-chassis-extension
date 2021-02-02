@@ -14,7 +14,6 @@ import (
 
 // const
 const (
-	msgWriteError = "write to response err: "
 	//DefaultProfilePath DefaultProfilePath
 	DefaultProfilePath = "profile"
 	//ProfileRouteRuleSubPath ProfileRouteRuleSubPath
