@@ -29,7 +29,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/go-chassis/go-chassis-extension/protocol/ginserver"
+	"github.com/go-chassis/go-chassis-extension/protocol/gin4r"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-chassis/go-chassis/v2"
@@ -78,7 +78,7 @@ func Cors() gin.HandlerFunc {
 }
 
 func main() {
-	ginserver.InstallPlugin()
+	gin4r.InstallPlugin()
 	// init default gin engine
 	r := gin.Default()
 	// add cors middleware for gin

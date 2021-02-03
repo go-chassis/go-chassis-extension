@@ -1,4 +1,4 @@
-package ginserver
+package gin4r
 
 import (
 	"context"
@@ -11,15 +11,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 	archaius "github.com/go-chassis/go-archaius"
-	"github.com/go-chassis/go-chassis-extension/protocol/ginserver/profile"
+	"github.com/go-chassis/go-chassis-extension/protocol/gin4r/profile"
 	"github.com/go-chassis/go-chassis/v2/core/registry"
 	"github.com/go-chassis/go-chassis/v2/core/server"
 	"github.com/go-chassis/go-chassis/v2/pkg/metrics"
 	"github.com/go-chassis/go-chassis/v2/pkg/util/iputil"
 	"github.com/go-chassis/openlog"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 const (
@@ -79,7 +77,7 @@ func (r *ginServer) initGinRoute(schema interface{}) error {
 		metricGroup.GET(metricPath, prometheusHandleFunc)
 	}
 	profile.AddProfileRoutes(engine.Group(""))
-	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	return nil
 }
 
