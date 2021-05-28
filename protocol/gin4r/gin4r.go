@@ -10,7 +10,7 @@ import (
 	"sync"
 
 	"github.com/gin-gonic/gin"
-	archaius "github.com/go-chassis/go-archaius"
+	"github.com/go-chassis/go-archaius"
 	"github.com/go-chassis/go-chassis-extension/protocol/gin4r/profile"
 	"github.com/go-chassis/go-chassis/v2/core/registry"
 	"github.com/go-chassis/go-chassis/v2/core/server"

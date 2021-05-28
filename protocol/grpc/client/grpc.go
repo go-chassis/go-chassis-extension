@@ -27,6 +27,11 @@ type Client struct {
 	timeout time.Duration
 }
 
+//Status has no operation
+func (c *Client) Status(rsp interface{}) (status int, err error) {
+	return 0, nil
+}
+
 //New create new grpc client
 func New(opts client.Options) (client.ProtocolClient, error) {
 	conn, err := newClientConn(opts)

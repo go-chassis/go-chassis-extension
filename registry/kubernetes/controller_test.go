@@ -40,7 +40,7 @@ func TestDiscoveryController(t *testing.T) {
 
 	// create services
 	s := &v1.Service{ObjectMeta: metav1.ObjectMeta{Name: "kubeserver"}}
-	_, err = client.CoreV1().Services("default").Create(ctx, p, metav1.CreateOptions{})
+	_, err = client.CoreV1().Services("default").Create(ctx, s, metav1.CreateOptions{})
 	if err != nil {
 		t.Errorf("error create service: %v", err)
 	}
