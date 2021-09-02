@@ -1,9 +1,13 @@
 package server
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 
 	"github.com/go-chassis/go-chassis/v2/core/common"
 	"github.com/go-chassis/go-chassis/v2/core/handler"
@@ -13,9 +17,6 @@ import (
 	"github.com/go-chassis/go-chassis/v2/pkg/runtime"
 	"github.com/go-chassis/go-chassis/v2/pkg/util/iputil"
 	"github.com/go-chassis/openlog"
-	"golang.org/x/net/context"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/metadata"
 )
 
 //err define
@@ -44,7 +45,7 @@ func Request2Invocation(ctx context.Context, req interface{}, info *grpc.UnarySe
 		sourceService = sourceServices[0]
 	}
 	//TODO maybe need set headers
-	m := make(map[string]string, 0)
+	m := make(map[string]string)
 	inv := &invocation.Invocation{
 		MicroServiceName:   runtime.ServiceName,
 		SourceMicroService: sourceService,
