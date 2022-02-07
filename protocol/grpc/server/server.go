@@ -30,6 +30,13 @@ const (
 	Name = "grpc"
 )
 
+var grpcServerOptions = make([]grpc.ServerOption, 0, 5)
+
+// GrpcServerOptions register grpc service options
+func GrpcServerOptions(so ...grpc.ServerOption) {
+	grpcServerOptions = append(grpcServerOptions, so...)
+}
+
 //Server is grpc server holder
 type Server struct {
 	s    *grpc.Server
@@ -76,7 +83,7 @@ func New(opts server.Options) server.ProtocolServer {
 	}
 	return &Server{
 		opts: opts,
-		s:    grpc.NewServer(grpc.UnaryInterceptor(interceptor)),
+		s:    grpc.NewServer(append(grpcServerOptions, grpc.UnaryInterceptor(interceptor))...),
 	}
 }
 
