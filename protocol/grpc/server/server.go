@@ -74,9 +74,16 @@ func New(opts server.Options) server.ProtocolServer {
 		})
 		return r.Result, r.Err
 	}
+
+	sops := make([]grpc.ServerOption, 0, 2)
+	sops = append(sops, grpc.UnaryInterceptor(interceptor))
+
+	if opts.BodyLimit != 0 {
+		sops = append(sops, grpc.MaxRecvMsgSize(int(opts.BodyLimit)))
+	}
 	return &Server{
 		opts: opts,
-		s:    grpc.NewServer(grpc.UnaryInterceptor(interceptor)),
+		s:    grpc.NewServer(sops...),
 	}
 }
 
