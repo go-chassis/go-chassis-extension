@@ -52,7 +52,9 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 	openlog.Info(fmt.Sprintf("zipkin tracer with options %s,%d,%s", uri, batchSize, batchInterval))
 	if collectorOption == DefaultCollector {
 		var err error
-		collector, err = zipkintracer.NewHTTPCollector(uri, zipkintracer.HTTPBatchSize(batchSize), zipkintracer.HTTPBatchInterval(batchInterval))
+		collector, err = zipkintracer.NewHTTPCollector(uri,
+			zipkintracer.HTTPBatchSize(batchSize),
+			zipkintracer.HTTPBatchInterval(batchInterval))
 		if err != nil {
 			openlog.Error(err.Error())
 			return nil, fmt.Errorf("unable to create zipkin collector: %+v", err)
@@ -69,7 +71,6 @@ func NewTracer(options map[string]string) (opentracing.Tracer, error) {
 		defaultRecorder,
 		zipkintracer.ClientServerSameSpan(true),
 		zipkintracer.TraceID128Bit(true),
-		zipkintracer.WithPrefixTracerState(options["prefixTracerState"]),
 	)
 	if err != nil {
 		openlog.Error(err.Error())
