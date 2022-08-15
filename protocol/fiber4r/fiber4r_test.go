@@ -16,13 +16,19 @@ func TestFiberServer_Start(t *testing.T) {
 		Address:       "127.0.0.1:3000",
 		MetricsEnable: true,
 	})
-	_, err := s.Register(Handler,
-		server.WithMethod(http.MethodGet),
-		server.WithPath("/hello"))
-	assert.NoError(t, err)
-
+	app := fiber.New()
+	app.Get("/hello", Handler)
+	t.Run("register right ptr,should success", func(t *testing.T) {
+		_, err := s.Register(app)
+		assert.NoError(t, err)
+	})
+	t.Run("register wrong ptr,should fail", func(t *testing.T) {
+		_, err := s.Register("")
+		assert.Error(t, err)
+	})
 	go s.Start()
 	time.Sleep(2 * time.Second)
+
 	t.Run("call http server, should success", func(t *testing.T) {
 		req, _ := http.NewRequest(http.MethodGet, "http://127.0.0.1:3000/hello", nil)
 		c := http.DefaultClient

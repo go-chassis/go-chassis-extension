@@ -51,9 +51,7 @@ func NewServer(opts server.Options) server.ProtocolServer {
 		WriteTimeout: r.opts.Timeout,
 		IdleTimeout:  r.opts.Timeout,
 	})
-	if r.opts.MetricsEnable {
-		addMetricsRoute(opts, r.app)
-	}
+
 	return r
 }
 
@@ -70,27 +68,15 @@ func (r *fiberServer) Register(schema interface{}, options ...server.RegisterOpt
 	for _, o := range options {
 		o(&opts)
 	}
-
-	switch opts.Method {
-	case http.MethodGet:
-		r.app.Get(opts.Path, schema.(fiber.Handler))
-	case http.MethodPost:
-		r.app.Post(opts.Path, schema.(fiber.Handler))
-	case http.MethodHead:
-		r.app.Head(opts.Path, schema.(fiber.Handler))
-	case http.MethodPut:
-		r.app.Put(opts.Path, schema.(fiber.Handler))
-	case http.MethodPatch:
-		r.app.Patch(opts.Path, schema.(fiber.Handler))
-	case http.MethodDelete:
-		r.app.Delete(opts.Path, schema.(fiber.Handler))
-	default:
-		return "", errors.New("method [" + opts.Method + "] do not support")
+	app, ok := schema.(*fiber.App)
+	if !ok {
+		return "", errors.New("must register *fiber.App")
 	}
+	r.app = app
 	return reflect.TypeOf(schema).String(), nil
 }
 
-//addMetricsRoute user fiber adaptor to fit in prom native http handler
+// addMetricsRoute user fiber adaptor to fit in prom native http handler
 func addMetricsRoute(opts server.Options, app *fiber.App) {
 	if opts.MetricsEnable {
 		metricPath := opts.MetricsAPI
@@ -118,6 +104,9 @@ func (r *fiberServer) Start() error {
 	if r.opts.TLSConfig != nil {
 		r.app.Server().TLSConfig = r.opts.TLSConfig
 		sslFlag = openTLS
+	}
+	if r.opts.MetricsEnable {
+		addMetricsRoute(r.opts, r.app)
 	}
 
 	l, lIP, lPort, err := iputil.StartListener(config.Address, config.TLSConfig)
