@@ -4,7 +4,14 @@ go get github.com/go-chassis/go-chassis-extension/protocol/fiber4r
 ```
 in your main.go, add one line
 ```go
-import _ "github.com/go-chassis/go-chassis-extension/protocol/fiber4r"
+import (
+
+
+	"github.com/go-chassis/go-chassis/v2"
+
+	_ "github.com/go-chassis/go-chassis-extension/protocol/fiber4r" //!! must decalre after github.com/go-chassis/go-chassis/v2
+)
+
 ```
 then [fiber](https://github.com/gofiber/fiber) will replace [default rest implementation](https://github.com/emicklei/go-restful).
 # How to collocate Fiber
