@@ -16,7 +16,10 @@ func TestFiberServer_Start(t *testing.T) {
 		Address:       "127.0.0.1:3000",
 		MetricsEnable: true,
 	})
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		Prefork: true,
+		Network: "tcp4",
+	})
 	app.Get("/hello", Handler)
 	t.Run("register right ptr,should success", func(t *testing.T) {
 		_, err := s.Register(app)
@@ -26,7 +29,8 @@ func TestFiberServer_Start(t *testing.T) {
 		_, err := s.Register("")
 		assert.Error(t, err)
 	})
-	go s.Start()
+	err := s.Start()
+	assert.NoError(t, err)
 	time.Sleep(2 * time.Second)
 
 	t.Run("call http server, should success", func(t *testing.T) {
@@ -41,6 +45,7 @@ func TestFiberServer_Start(t *testing.T) {
 		c := http.DefaultClient
 		r, err := c.Do(req)
 		assert.NoError(t, err)
+
 		assert.Equal(t, http.StatusOK, r.StatusCode)
 	})
 

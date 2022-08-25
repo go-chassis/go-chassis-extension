@@ -1,6 +1,7 @@
 package fiber4r
 
 import (
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"math"
@@ -9,6 +10,7 @@ import (
 	"reflect"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/go-chassis/go-chassis/v2/core/registry"
 	"github.com/go-chassis/go-chassis/v2/core/server"
@@ -46,12 +48,6 @@ func NewServer(opts server.Options) server.ProtocolServer {
 	r := &fiberServer{
 		opts: opts,
 	}
-	r.app = fiber.New(fiber.Config{
-		ReadTimeout:  r.opts.Timeout,
-		WriteTimeout: r.opts.Timeout,
-		IdleTimeout:  r.opts.Timeout,
-	})
-
 	return r
 }
 
@@ -109,12 +105,23 @@ func (r *fiberServer) Start() error {
 		addMetricsRoute(r.opts, r.app)
 	}
 
-	l, lIP, lPort, err := iputil.StartListener(config.Address, config.TLSConfig)
-
-	if err != nil {
-		return fmt.Errorf("failed to start listener: %w", err)
+	var l net.Listener
+	var lIP string
+	var lPort string
+	success := false
+	for i := 0; i < 10; i++ {
+		l, lIP, lPort, err = listen(config.Address, config.TLSConfig)
+		if err != nil {
+			openlog.Warn(fmt.Sprintf("failed to start %s,retry %d ", err, i))
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		success = true
+		break
 	}
-
+	if !success {
+		return fmt.Errorf("failed to start after 10 times retry: %w ", err)
+	}
 	registry.InstanceEndpoints[config.ProtocolServerName] = net.JoinHostPort(lIP, lPort) + sslFlag
 
 	go func() {
@@ -124,6 +131,11 @@ func (r *fiberServer) Start() error {
 			server.ErrRuntime <- err
 		}
 	}()
+	if !fiber.IsChild() {
+		openlog.Info("parent process")
+	} else {
+		openlog.Info("child process")
+	}
 
 	openlog.Info(fmt.Sprintf("http server is listening at %s", registry.InstanceEndpoints[config.ProtocolServerName]))
 
@@ -144,4 +156,33 @@ func (r *fiberServer) Stop() error {
 
 func (r *fiberServer) String() string {
 	return Name
+}
+
+// listen start listener with address and tls(if it has), returns the listener and the real listened ip/port
+func listen(listenAddress string, tlsConfig *tls.Config) (listener net.Listener, listenedIP string, port string, err error) {
+	if tlsConfig == nil {
+		listener, err = net.Listen("tcp4", listenAddress)
+	} else {
+		listener, err = tls.Listen("tcp4", listenAddress, tlsConfig)
+	}
+	if err != nil {
+		return
+	}
+	realAddr := listener.Addr().String()
+	listenedIP, port, err = net.SplitHostPort(realAddr)
+	if err != nil {
+		return
+	}
+	ip := net.ParseIP(listenedIP)
+	if ip.IsUnspecified() {
+		if iputil.IsIPv6Address(ip) {
+			listenedIP = iputil.GetLocalIPv6()
+			if listenedIP == "" {
+				listenedIP = iputil.GetLocalIP()
+			}
+		} else {
+			listenedIP = iputil.GetLocalIP()
+		}
+	}
+	return
 }
