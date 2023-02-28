@@ -17,7 +17,7 @@ require (
 	github.com/cenkalti/backoff v2.0.0+incompatible // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/emicklei/go-restful v2.15.1-0.20220703112237-d9c71e118c95+incompatible // indirect
+	github.com/emicklei/go-restful v2.16.0+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.4.7 // indirect
 	github.com/go-chassis/cari v0.5.1-0.20210823023004-74041d1363c4 // indirect
 	github.com/go-chassis/foundation v0.3.0 // indirect
