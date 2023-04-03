@@ -3,9 +3,9 @@ module github.com/go-chassis/go-chassis-extension/protocol/gozero4r
 go 1.19
 
 require (
-	github.com/go-chassis/go-archaius v1.5.6
 	github.com/go-chassis/go-chassis/v2 v2.7.1
 	github.com/go-chassis/openlog v1.1.3
+	github.com/prometheus/client_golang v1.14.0
 	github.com/stretchr/testify v1.8.2
 	github.com/zeromicro/go-zero v1.5.0
 	github.com/zeromicro/zero-contrib/router/mux v0.0.0-20230212061721-86dbe4a9e613
@@ -24,6 +24,7 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-chassis/cari v0.7.1-0.20220815112157-2c62cc5ae1a3 // indirect
 	github.com/go-chassis/foundation v0.4.0 // indirect
+	github.com/go-chassis/go-archaius v1.5.6 // indirect
 	github.com/go-chassis/go-restful-swagger20 v1.0.4-0.20220704025524-9243cbee26b7 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -47,7 +48,6 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.0.7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/prometheus/client_golang v1.14.0 // indirect
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
