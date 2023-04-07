@@ -22,7 +22,7 @@ import (
 
 const (
 	//Name is a variable of type string which indicates the protocol being used
-	Name = "gozero"
+	Name = "rest"
 	//DefaultMetricPath DefaultMetricPath
 	DefaultMetricPath = "metrics"
 )

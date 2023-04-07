@@ -11,7 +11,7 @@ in chassis.yaml, add following
 ---
 servicecomb:
   protocols:
-    gozero:            # use protocol gozero
+    rest:            # use protocol gozero
       listenAddress: 127.0.0.1:8001
   metrics:
     apiPath: /metrics
